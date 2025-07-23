@@ -1,5 +1,5 @@
 variable "RELEASE" {
-    default = "0.0.0"
+    default = "0.0.1"
 }
 
 variable "COMFYUI_VERSION" {
@@ -13,7 +13,8 @@ variable "GITHUB_WORKSPACE" {
 target "default" {
     context = "${GITHUB_WORKSPACE}"
     dockerfile = "Dockerfile"
-    tags = ["chelorope/runpod-comfyui:${RELEASE}"]
+    tags = ["chelorope/runpod-comfyui:${RELEASE}", "chelorope/runpod-comfyui:latest"]
+    platforms = ["linux/amd64"]
     contexts = {
         scripts = "container-template"
         proxy = "container-template/proxy"

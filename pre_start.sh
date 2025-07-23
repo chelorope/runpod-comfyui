@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Create model directories in workspace if they don't exist
-mkdir -p /workspace/comfyui/models/{checkpoints,clip,clip_vision,controlnet,diffusers,embeddings,loras,upscale_models,vae,unet,configs}
-
 cd /ComfyUI
 nohup python main.py --listen --port 3000 >> /dev/stdout 2>&1 &
 

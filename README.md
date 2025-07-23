@@ -1,43 +1,60 @@
-This template provides [ComfyUI v0.3.10](https://github.com/comfyanonymous/ComfyUI/releases/tag/v0.3.10) (with ComfyUI Manager) with a couple of pre-installed models and Jupyter Lab.
+# RunPod ComfyUI Template
 
-## Models
+A ready-to-use RunPod template with [ComfyUI v0.3.10](https://github.com/comfyanonymous/ComfyUI/releases/tag/v0.3.10) and pre-installed AI models for Stable Diffusion workflows.
 
-The following models are already included:
+## What's Included
 
-- [FLUX.1 schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell)
-- [Stable Diffusion XL Base 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
-- [Stable Diffusion XL Refiner 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0)
-- [Stable Diffusion 1.5](https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive)
-- [Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1)
+- **ComfyUI** with ComfyUI Manager for easy custom node installation
+- **Pre-installed Models:**
+  - FLUX.1 schnell
+  - Stable Diffusion XL Base & Refiner 1.0
+  - Stable Diffusion 1.5 & 2.1
+- **Jupyter Lab** for additional development work
+- **SSH access** for advanced users
 
-## Custom Models
+## Quick Start
 
-You can add your own models by placing them in the appropriate directories under `/workspace/comfyui/models/`:
+1. Deploy this template on RunPod
+2. Once running, access ComfyUI at `https://[your-pod-id]-3000.proxy.runpod.net`
+3. Access Jupyter Lab at `https://[your-pod-id]-8888.proxy.runpod.net`
 
-- Checkpoints: `/workspace/comfyui/models/checkpoints/`
-- VAE: `/workspace/comfyui/models/vae/`
-- LoRA: `/workspace/comfyui/models/loras/`
-- Controlnet: `/workspace/comfyui/models/controlnet/`
-- Upscalers: `/workspace/comfyui/models/upscale_models/`
-- Embeddings: `/workspace/comfyui/models/embeddings/`
-- CLIP: `/workspace/comfyui/models/clip/`
-- CLIP Vision: `/workspace/comfyui/models/clip_vision/`
+## Adding Custom Content
 
-These paths are configured in ComfyUI's `extra_model_paths.yml` file, so models placed in these directories will be automatically detected by ComfyUI.
+This template uses symbolic links to map persistent storage directories to ComfyUI's expected locations. All content placed in `/workspace/ComfyUI/` will be automatically available to ComfyUI and persisted between pod sessions.
 
-> **Note:** data stored in `/workspace/comfyui` will be deleted when the Pod is deleted, unless you're using a [network volume](https://docs.runpod.io/pods/storage/create-network-volumes).
+### Models
+
+Place your models in these directories (auto-detected via symbolic links):
+
+- **Models** (`/workspace/ComfyUI/models/`)  
+  AI models (SDXL, SD 1.5, FLUX, etc.)
+
+### Custom Nodes
+
+- **Custom Nodes** (`/workspace/ComfyUI/custom_nodes/`)  
+  Third-party extensions that add new functionality to ComfyUI
+
+### Workflows
+
+- **Workflows** (`/workspace/ComfyUI/workflows/`)  
+  Saved ComfyUI workflow files (.json) for reusable generation pipelines
+
+> **💡 Tip:** Use a RunPod Network Volume to persist all your models, custom nodes, and workflows between pod sessions.
 
 ## Ports
 
-| Application | Port | Type |
-| ----------- | ---- | ---- |
-| ComfyUI     | 3000 | HTTP |
-| Jupyter Lab | 8888 | HTTP |
-| SSH         | 22   | TCP  |
+| Service     | Port | Access URL Pattern                       |
+| ----------- | ---- | ---------------------------------------- |
+| ComfyUI     | 3000 | `https://[pod-id]-3000.proxy.runpod.net` |
+| Jupyter Lab | 8888 | `https://[pod-id]-8888.proxy.runpod.net` |
+| SSH         | 22   | Use RunPod's SSH instructions            |
 
-## Important Notes
+## Environment Variables
 
-- We automatically set the password for Jupyter Lab when creating the pod, but if you want to set it yourself, you have to do so via the `JUPYTER_PASSWORD` environment variable
-- For technical support, consider:
-  - [RunPod Community on Discord](https://discord.gg/cUpRmau42V)
-  - [ComfyUI GitHub Issues](https://github.com/comfyanonymous/ComfyUI/issues)
+- `JUPYTER_PASSWORD` - Set custom password for Jupyter Lab (optional)
+
+## Support
+
+- [Project Repo](https://github.com/chelorope/runpod-comfyui)
+- [RunPod Discord Community](https://discord.gg/cUpRmau42V)
+- [ComfyUI GitHub](https://github.com/comfyanonymous/ComfyUI)
